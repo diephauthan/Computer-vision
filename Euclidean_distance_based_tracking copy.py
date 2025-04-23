@@ -40,7 +40,7 @@ def detect_objects_by_edges(frame):
     detections = []
     for cnt in contours:
         area = cv2.contourArea(cnt)
-        if area > 4000:  # Filter based on area
+        if area > 10000:  # Filter based on area
             x, y, w, h = cv2.boundingRect(cnt)
             aspect_ratio = float(w) / h
             if 0.3 < aspect_ratio < 3.0:  # Filter based on aspect ratio
@@ -74,7 +74,7 @@ def detect_objects_combined(frame):
     detections = []
     for cnt in contours:
         area = cv2.contourArea(cnt)
-        if area > 4000:  # Filter based on area
+        if area > 100000:  # Filter based on area
             x, y, w, h = cv2.boundingRect(cnt)
             aspect_ratio = float(w) / h
             if 0.3 < aspect_ratio < 3.0:  # Filter based on aspect ratio
@@ -116,8 +116,8 @@ try:
     cv2.setMouseCallback('Basler Camera', mouse_callback)
     
     # Create a smaller edge window
-    cv2.namedWindow('Edges', cv2.WINDOW_NORMAL)
-    cv2.resizeWindow('Edges', 400, 300)
+    # cv2.namedWindow('Edges', cv2.WINDOW_NORMAL)
+    # cv2.resizeWindow('Edges', 400, 300)
 
     print("Camera is open and displaying images.")
     print("Using edge detection for object tracking.")
@@ -144,11 +144,11 @@ try:
             # Draw tracking results
             for box_id in boxes_ids:
                 x, y, w, h, id = box_id
-                cv2.putText(display_frame, f"ID: {id}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-                cv2.rectangle(display_frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                cv2.putText(display_frame, f"ID: {id}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 10)
+                cv2.rectangle(display_frame, (x, y), (x + w, y + h), (0, 255, 0), 10)
             
             # Display the edge mask in a separate window
-            cv2.imshow('Edges', edge_mask)
+            # cv2.imshow('Edges', edge_mask)
             
             # Display the frame with tracking information
             cv2.imshow('Basler Camera', display_frame)

@@ -87,7 +87,7 @@ try:
     tracker = EuclideanDistTracker()
 
     # Create object detector (Background Subtractor)
-    object_detector = cv2.createBackgroundSubtractorMOG2(history=200, varThreshold=40)
+    object_detector = cv2.createBackgroundSubtractorMOG2(history=100, varThreshold=50)
     
     
     # Background accumulation frames
@@ -166,7 +166,7 @@ try:
             for cnt in contours:
                 # Calculate area and remove small elements
                 area = cv2.contourArea(cnt)
-                if area > 3000:  # Increased area threshold to filter out small noise
+                if area > 300000:  # Increased area threshold to filter out small noise
                     x, y, w, h = cv2.boundingRect(cnt)
                     # Further filter based on aspect ratio to avoid very thin or wide rectangles
                     aspect_ratio = float(w) / h
